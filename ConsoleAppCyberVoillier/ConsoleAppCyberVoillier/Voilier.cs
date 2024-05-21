@@ -4,7 +4,7 @@ public class Voilier
 {
     private int id;
     private string code;
-    //private course
+    private List<Personne> equipage = new();
 
     //properties
     public int Id
@@ -19,10 +19,44 @@ public class Voilier
         set => code = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    //constructor
-    public Voilier(int id, string code)
+    public List<Personne> Equipage
     {
+        get => equipage;
+        set => equipage = value ?? throw new ArgumentNullException(nameof(value));
+    }
+
+    //constructor
+    public Voilier(int id, string code, List<Personne> equipage)
+    {
+        
         Id = id;
         Code = code;
+        Equipage = equipage;
     }
+
+    private bool addPersonne(Personne personne)
+    {
+        if (personne == searchPersonne(personne.Id))
+            return false;
+        equipage.Add(personne);
+        return true;
+
+    }
+
+    private Personne searchPersonne(int id)
+    {
+        return equipage.Find(a => a.Id == id);
+    }
+
+    private bool RemovePersonne(Personne personne)
+    {
+        if (!equipage.Contains(personne))
+            return false;
+        equipage.Remove(personne);
+        return true;
+    }
+
+    //CREATE, READ, UPDATE, DELETE
+
+
 }
