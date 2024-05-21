@@ -28,8 +28,8 @@ public class Penalite
     //constructor
     public Penalite(string id, double duree, string desc)
     {
-        this.id = id;
-        this.duree = duree;
-        this.desc = desc;
+        Id = id;
+        Duree = duree;
+        Desc = desc;
     }
 }

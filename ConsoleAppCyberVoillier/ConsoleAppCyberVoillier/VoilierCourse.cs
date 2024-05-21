@@ -21,7 +21,13 @@ public class VoilierCourse : VoilierInscrit
     //constructor
     public VoilierCourse(int id, string code, Personne[] equipage, Sponsor[] entreprise, double tempsBrute, double tempsReel) : base(id, code, equipage, entreprise)
     {
-        this.tempsBrute = tempsBrute;
-        this.tempsReel = tempsReel;
+        TempsBrute = tempsBrute;
+        TempsReel = 0;
+    }
+    
+    //applique la penalite sur temps reel
+    public void AppliquerPenalite(Penalite penalite)
+    {
+        tempsReel += penalite.Duree;
     }
 }

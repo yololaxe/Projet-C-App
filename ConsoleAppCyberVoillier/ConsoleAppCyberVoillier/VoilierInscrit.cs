@@ -22,7 +22,7 @@ public class VoilierInscrit: Voilier
     //constructor
     public VoilierInscrit(int id, string code, Personne[] equipage, Sponsor[] entreprise) : base(id, code)
     {
-        this.equipage = equipage;
-        this.entreprise = entreprise;
+        Equipage = equipage;
+        Entreprise = entreprise;
     }
 }
