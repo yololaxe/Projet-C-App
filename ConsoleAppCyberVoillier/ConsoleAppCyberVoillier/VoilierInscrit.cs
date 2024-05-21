@@ -2,16 +2,12 @@ namespace ConsoleAppCyberVoillier;
 
 public class VoilierInscrit: Voilier
 {
-    private Personne[] equipage;
+    
     private Sponsor[] entreprise;
     //private course;
     
     //properties
-    public Personne[] Equipage
-    {
-        get => equipage;
-        set => equipage = value ?? throw new ArgumentNullException(nameof(value));
-    }
+   
 
     public Sponsor[] Entreprise
     {
@@ -20,9 +16,9 @@ public class VoilierInscrit: Voilier
     }
     
     //constructor
-    public VoilierInscrit(int id, string code, Personne[] equipage, Sponsor[] entreprise) : base(id, code)
+    public VoilierInscrit(int id, string code, Personne[] equipage, Sponsor[] entreprise) : base(id, code, equipage)
     {
-        Equipage = equipage;
-        Entreprise = entreprise;
+       
+        this.entreprise = entreprise;
     }
 }
