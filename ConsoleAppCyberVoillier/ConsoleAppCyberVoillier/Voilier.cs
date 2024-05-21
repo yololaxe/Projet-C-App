@@ -34,16 +34,16 @@ public class Voilier
         Equipage = equipage;
     }
 
-    private bool addPersonne(Personne personne)
+    private bool AddPersonne(Personne personne)
     {
-        if (personne == searchPersonne(personne.Id))
+        if (personne == SearchPersonne(personne.Id))
             return false;
         equipage.Add(personne);
         return true;
 
     }
 
-    private Personne searchPersonne(int id)
+    private Personne SearchPersonne(int id)
     {
         return equipage.Find(a => a.Id == id);
     }

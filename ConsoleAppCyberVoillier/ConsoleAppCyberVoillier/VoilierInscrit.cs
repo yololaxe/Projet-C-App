@@ -26,16 +26,16 @@ public class VoilierInscrit: Voilier
     }
     
     //CREATE, READ, UPDATE, DELETE
-    private bool addSponsor(Sponsor sponsor)
+    private bool AddSponsor(Sponsor sponsor)
     {
-        if (sponsor == searchSponsor(sponsor.Id))
+        if (sponsor == SearchSponsor(sponsor.Id))
             return false;
         entreprises.Add(sponsor);
         return true;
 
     }
 
-    private Sponsor searchSponsor(int id)
+    private Sponsor SearchSponsor(int id)
     {
         return entreprises.Find(a => a.Id == id);
     }
@@ -47,4 +47,6 @@ public class VoilierInscrit: Voilier
         entreprises.Remove(sponsor);
         return true;
     }
+    
+    
 }

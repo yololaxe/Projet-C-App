@@ -5,6 +5,8 @@ public class VoilierCourse : VoilierInscrit
     private double tempsBrute;
     private double tempsReel;
     
+   
+    
     //properties
     public double TempsBrute
     {
