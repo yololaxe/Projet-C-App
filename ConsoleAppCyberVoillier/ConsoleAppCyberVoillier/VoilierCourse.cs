@@ -19,7 +19,7 @@ public class VoilierCourse : VoilierInscrit
     }
 
     //constructor
-    public VoilierCourse(int id, string code, Personne[] equipage, Sponsor[] entreprise, double tempsBrute, double tempsReel) : base(id, code, equipage, entreprise)
+    public VoilierCourse(int id, string code, List<Personne> equipage, List<Sponsor> entreprise, double tempsBrute, double tempsReel, string codeInscription) : base(id, code, equipage, entreprise, codeInscription)
     {
         TempsBrute = tempsBrute;
         TempsReel = 0;

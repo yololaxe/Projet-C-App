@@ -3,22 +3,25 @@ namespace ConsoleAppCyberVoillier;
 public class VoilierInscrit: Voilier
 {
     
-    private Sponsor[] entreprise;
-    //private course;
-    
-    //properties
-   
+    private List<Sponsor> entreprises;
+    private string codeInscription;
 
-    public Sponsor[] Entreprise
+    public List<Sponsor> Entreprises
     {
-        get => entreprise;
-        set => entreprise = value ?? throw new ArgumentNullException(nameof(value));
+        get => entreprises;
+        set => entreprises = value ?? throw new ArgumentNullException(nameof(value));
     }
-    
-    //constructor
-    public VoilierInscrit(int id, string code, Personne[] equipage, Sponsor[] entreprise) : base(id, code, equipage)
+
+    public string CodeInscription
     {
-       
-        this.entreprise = entreprise;
+        get => codeInscription;
+        set => codeInscription = value ?? throw new ArgumentNullException(nameof(value));
+    }
+
+    //constructor
+    public VoilierInscrit(int id, string code, List<Personne> equipage, List<Sponsor> entreprises, string codeInscription) : base(id, code, equipage)
+    {
+        this.entreprises = entreprises;
+        this.codeInscription = codeInscription;
     }
 }

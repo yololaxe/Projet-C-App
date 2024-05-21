@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\redium\\.nuget\\packages\\": {}
+    "C:\\Users\\yolol\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\redium\\Documents\\c#\\proj c#\\Projet-C-App\\ConsoleAppCyberVoillier\\ConsoleAppCyberVoillier\\ConsoleAppCyberVoillier.csproj",
+      "projectUniqueName": "C:\\Users\\yolol\\Documents\\COURS\\EPSI\\C#\\Projet-C-App\\ConsoleAppCyberVoillier\\ConsoleAppCyberVoillier\\ConsoleAppCyberVoillier.csproj",
       "projectName": "ConsoleAppCyberVoillier",
-      "projectPath": "C:\\Users\\redium\\Documents\\c#\\proj c#\\Projet-C-App\\ConsoleAppCyberVoillier\\ConsoleAppCyberVoillier\\ConsoleAppCyberVoillier.csproj",
-      "packagesPath": "C:\\Users\\redium\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\redium\\Documents\\c#\\proj c#\\Projet-C-App\\ConsoleAppCyberVoillier\\ConsoleAppCyberVoillier\\obj\\",
+      "projectPath": "C:\\Users\\yolol\\Documents\\COURS\\EPSI\\C#\\Projet-C-App\\ConsoleAppCyberVoillier\\ConsoleAppCyberVoillier\\ConsoleAppCyberVoillier.csproj",
+      "packagesPath": "C:\\Users\\yolol\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\yolol\\Documents\\COURS\\EPSI\\C#\\Projet-C-App\\ConsoleAppCyberVoillier\\ConsoleAppCyberVoillier\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\redium\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\yolol\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConsoleAppCyberVoillier")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2bc0406149e5ec47f9469e36612e81c74c605233")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+87d5a494ce1a46ab840ae5db9edec1a15c86ba69")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConsoleAppCyberVoillier")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConsoleAppCyberVoillier")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
