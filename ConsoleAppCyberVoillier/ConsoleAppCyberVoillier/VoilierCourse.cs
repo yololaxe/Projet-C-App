@@ -4,8 +4,7 @@ public class VoilierCourse : VoilierInscrit
 {
     private double tempsBrute;
     private double tempsReel;
-    
-   
+    private List<Penalite> penalites;
     
     //properties
     public double TempsBrute
@@ -21,15 +20,21 @@ public class VoilierCourse : VoilierInscrit
     }
 
     //constructor
-    public VoilierCourse(int id, string code, List<Personne> equipage, List<Sponsor> entreprise, double tempsBrute, double tempsReel, string codeInscription) : base(id, code, equipage, entreprise, codeInscription)
+    public VoilierCourse(int id, string code, List<Personne> equipage, List<Sponsor> entreprise, double tempsBrute, string codeInscription) : base(id, code, equipage, entreprise, codeInscription)
     {
         TempsBrute = tempsBrute;
         TempsReel = 0;
+        penalites = [];
     }
     
     //applique la penalite sur temps reel
-    public void AppliquerPenalite(Penalite penalite)
+    public void CalculPenalite()
     {
-        tempsReel += penalite.Duree;
+        foreach (Penalite penalite in penalites)
+        {
+            tempsReel += penalite.Duree;
+        }
     }
+    
+    
 }
