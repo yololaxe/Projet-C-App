@@ -30,9 +30,9 @@ public class Course
         EnCourse = enCourse;
         Epreuves = epreuves;
     }
-    
-    
-    //CRUD VOILIER INSCRIT
+
+
+    #region VoilierInscrit
     public void AddVoilierInscrit(VoilierInscrit voilier)
     {
         if (voilier == GetVoilierCourse(voilier.Id) ) throw new ArgumentNullException(nameof(voilier));
@@ -60,54 +60,11 @@ public class Course
 
         inscrits.Remove(voilier);
     }
+    #endregion
 
-    // CRUD INSCRIPTION DES VOILIERS
-    public VoilierInscrit InscrireVoilier(Voilier voilier, List<Sponsor> sponsors)
-    {
-        if (inscrits.Any(v => v.Code == voilier.Code))
-            throw new Exception($"Voilier déjà inscrit: {voilier.Code}");
-        
 
-        VoilierInscrit voilierInscrit = new VoilierInscrit(
-            voilier.Id, 
-            voilier.Code,
-            voilier.Equipage,
-            sponsors, 
-            $"C{DateTime.Now.Year}{inscrits.Count + 1:0000}"
-            );
-        
-        inscrits.Add(voilierInscrit);
-        return voilierInscrit;
-    }
+    #region VoilierCourse
 
-    public bool DesinscrireVoilier(string codeInscription)
-    {
-        var voilierInscrit = inscrits.FirstOrDefault(v => v.CodeInscription == codeInscription);
-        if (voilierInscrit == null)
-        {
-            return false;
-        }
-        inscrits.Remove(voilierInscrit);
-        return true;
-    }
-    
-    //CRUD VOILIER EN COURSE
-
-    public void DebuterLaCourse()
-    {
-        foreach (VoilierInscrit voilierInscrit in inscrits)
-        {
-            enCourse.Add(new VoilierCourse(voilierInscrit,0));
-        }
-
-        epreuves.Sort();
-        foreach (Epreuve epreuve in epreuves)
-        {
-            
-        }
-    }
-    
-    
     public VoilierCourse GetVoilierCourse(int id)
     {
         return enCourse.Find(v => v.Id == id);
@@ -130,7 +87,11 @@ public class Course
         enCourse.Remove(voilier);
     }
 
-    // CRUD EPREVE
+    #endregion
+
+
+    #region Epreuves
+
     public void AddEpreuve(Epreuve epreuve)
     {
         if (epreuve == GetEpreuve(epreuve.Numero)) throw new ArgumentNullException(nameof(epreuve));
@@ -158,12 +119,103 @@ public class Course
 
         epreuves.Remove(epreuve);
     }
+
+    #endregion
+    
+
+    // CRUD INSCRIPTION DES VOILIERS
+    public VoilierInscrit InscrireVoilier(Voilier voilier, List<Sponsor> sponsors)
+    {
+        if (inscrits.Any(v => v.Code == voilier.Code))
+            throw new Exception($"Voilier déjà inscrit: {voilier.Code}");
+        
+
+        VoilierInscrit voilierInscrit = new VoilierInscrit(
+            voilier.Id, 
+            voilier.Code,
+            voilier.Equipage,
+            sponsors, 
+            $"C{DateTime.Now.Year}{inscrits.Count + 1:0000}"
+            );
+        
+        inscrits.Add(voilierInscrit);
+        return voilierInscrit;
+    }
+
+    public bool DesinscrireVoilier(string codeInscription)
+    {
+        VoilierInscrit? voilierInscrit = inscrits.FirstOrDefault(v => v.CodeInscription == codeInscription);
+        if (voilierInscrit == null)
+        {
+            return false;
+        }
+        inscrits.Remove(voilierInscrit);
+        return true;
+    }
     
     //METHODES 
+
+    public void DebuterLaCourse()
+    {
+        foreach (VoilierInscrit voilierInscrit in inscrits)
+        {
+            enCourse.Add(new VoilierCourse(voilierInscrit,0));
+        }
+
+        epreuves.Sort((e1, e2) => e1.Ordre.CompareTo(e2.Ordre));
+    }
     
-    public List<VoilierCourse> ClasserVoiliers(Course course) {
-        List<VoilierCourse> voiliersComplets = course.EnCourse
-            .Where(v => v.EpreuvesEffectues.Count == course.Epreuves.Count)
+    public bool EnregistrerTemps(int voilierCourseId, Epreuve epreuve, double temps)
+    {
+        VoilierCourse? voilierCourse = EnCourse.FirstOrDefault(v => v.Id == voilierCourseId);
+        if (voilierCourse != null)
+        {
+            voilierCourse.TempsBrute += temps;
+            voilierCourse.EpreuvesEffectuees.Add(epreuve);
+            return true;
+        }
+
+        throw new Exception("Ce Voilier n'est pas en course");
+        return false;
+    }
+    
+    public void AjouterPenalite(int voilierCourseId, Penalite penalite)
+    {
+        VoilierCourse? voilierCourse = EnCourse.FirstOrDefault(v => v.Id == voilierCourseId);
+        if (voilierCourse != null)
+        {
+            voilierCourse.Penalites.Add(penalite);
+        }
+    }
+
+    public bool FinDeCourse()
+    {
+        foreach (VoilierCourse voilierCourse in enCourse)
+        {
+            if (voilierCourse.EpreuvesEffectuees.Count != epreuves.Count)
+            {
+                throw new Exception("Impossible finir la course : tous les voilier n'ont pas enregistrer leurs temps");
+            }
+            voilierCourse.CalculerTempsReel();
+        }
+        Console.WriteLine($"Classement des voiliers de la course : ");
+        var list = ClasserVoiliers();
+        for (var i = 0; i < list.Count; i++)
+        {
+            var voilier = list[i];
+            Console.WriteLine($"{i++}. {voilier.Code} avec {voilier.TempsReel/3600}h {voilier.TempsReel/60}m {voilier.TempsReel%60}s");
+        }
+
+        return true;
+    }
+    
+    
+    
+    
+    
+    public List<VoilierCourse> ClasserVoiliers() {
+        List<VoilierCourse> voiliersComplets = EnCourse
+            .Where(v => v.EpreuvesEffectuees.Count == Epreuves.Count)
             .ToList();
         
         foreach (VoilierCourse voiliersComplet in voiliersComplets)

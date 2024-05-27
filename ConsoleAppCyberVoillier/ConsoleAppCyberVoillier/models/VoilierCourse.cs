@@ -5,7 +5,7 @@ public class VoilierCourse : VoilierInscrit
     private double tempsBrute;
     private double tempsReel = 0;
     private List<Penalite> penalites = [];
-    private List<Epreuve> epreuvesEffectues = [];
+    private List<Epreuve> epreuvesEffectuees = [];
     
     //properties
     public double TempsBrute
@@ -20,10 +20,17 @@ public class VoilierCourse : VoilierInscrit
         set => tempsReel = value;
     }
 
-    public List<Epreuve> EpreuvesEffectues
+    public List<Epreuve> EpreuvesEffectuees
     {
-        get => epreuvesEffectues;
-        set => epreuvesEffectues = value ?? throw new ArgumentNullException(nameof(value));
+        get => epreuvesEffectuees;
+        set => epreuvesEffectuees = value ?? throw new ArgumentNullException(nameof(value));
+    }
+
+
+    public List<Penalite> Penalites
+    {
+        get => penalites;
+        set => penalites = value ?? throw new ArgumentNullException(nameof(value));
     }
 
     public VoilierCourse(int id, string code, List<Personne> equipage, List<Sponsor> entreprises, string codeInscription, double tempsBrute) : base(id, code, equipage, entreprises, codeInscription)
