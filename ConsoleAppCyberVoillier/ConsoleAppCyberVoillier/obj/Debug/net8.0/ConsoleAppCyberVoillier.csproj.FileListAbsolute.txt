@@ -1,0 +1,15 @@
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\bin\Debug\net8.0\ConsoleAppCyberVoillier.exe
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\bin\Debug\net8.0\ConsoleAppCyberVoillier.deps.json
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\bin\Debug\net8.0\ConsoleAppCyberVoillier.runtimeconfig.json
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\bin\Debug\net8.0\ConsoleAppCyberVoillier.dll
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\bin\Debug\net8.0\ConsoleAppCyberVoillier.pdb
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\obj\Debug\net8.0\ConsoleAppCyberVoillier.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\obj\Debug\net8.0\ConsoleAppCyberVoillier.AssemblyInfoInputs.cache
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\obj\Debug\net8.0\ConsoleAppCyberVoillier.AssemblyInfo.cs
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\obj\Debug\net8.0\ConsoleAppCyberVoillier.csproj.CoreCompileInputs.cache
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\obj\Debug\net8.0\ConsoleAppCyberVoillier.sourcelink.json
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\obj\Debug\net8.0\ConsoleAppCyberVoillier.dll
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\obj\Debug\net8.0\refint\ConsoleAppCyberVoillier.dll
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\obj\Debug\net8.0\ConsoleAppCyberVoillier.pdb
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\obj\Debug\net8.0\ConsoleAppCyberVoillier.genruntimeconfig.cache
+C:\Users\enzo1\OneDrive\Bureau\Cours_epsi\2eme année\c#-epsi\Projet-C-App\ConsoleAppCyberVoillier\ConsoleAppCyberVoillier\obj\Debug\net8.0\ref\ConsoleAppCyberVoillier.dll
