@@ -20,7 +20,6 @@ public class Penalite
         get => duree;
         set
         {
-            // On ne peut pas utiliser ?? ici car la valeur est de type double
             duree = value <= 0 
                 ? throw new ArgumentOutOfRangeException(nameof(value), "Duree doit être plus grande que zero.")
                 : value;

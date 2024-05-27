@@ -5,7 +5,7 @@ public class VoilierInscrit: Voilier
     
     private List<Sponsor> entreprises;
     private string codeInscription;
-
+//properties
     public List<Sponsor> Entreprises
     {
         get => entreprises;

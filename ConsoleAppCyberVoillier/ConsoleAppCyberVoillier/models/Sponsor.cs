@@ -5,7 +5,7 @@ public class Sponsor
     private int id;
     private string nom;
 
-    //properties
+    //properties cc
     public int Id
     {
         get => id;

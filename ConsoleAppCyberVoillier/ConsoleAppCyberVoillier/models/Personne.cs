@@ -7,7 +7,7 @@ public class Personne
     private string prenom;
     private string post;
     
-    //properties
+    //properties cc
     public int Id
     {
         get => id;
