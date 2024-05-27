@@ -33,7 +33,7 @@ public class Voilier
         Code = code;
         Equipage = equipage;
     }
-
+    
     private bool AddPersonne(Personne personne)
     {
         if (personne == SearchPersonne(personne.Id))
