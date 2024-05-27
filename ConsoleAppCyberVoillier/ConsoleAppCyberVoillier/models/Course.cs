@@ -61,25 +61,23 @@ public class Course
         inscrits.Remove(voilier);
     }
 
-    // CRUD VOILIERCOURSE
-    public bool InscrireVoilier(Voilier voilier, List<Personne> equipage, List<Sponsor> sponsors)
+    // CRUD INSCRIPTION DES VOILIERS
+    public VoilierInscrit InscrireVoilier(Voilier voilier, List<Sponsor> sponsors)
     {
         if (inscrits.Any(v => v.Code == voilier.Code))
-        {
-            Console.WriteLine($"Voilier déjà inscrit : {voilier.Code}");
-            return false;
-        }
+            throw new Exception($"Voilier déjà inscrit: {voilier.Code}");
+        
 
         VoilierInscrit voilierInscrit = new VoilierInscrit(
             voilier.Id, 
             voilier.Code,
-            equipage,
+            voilier.Equipage,
             sponsors, 
             $"C{DateTime.Now.Year}{inscrits.Count + 1:0000}"
             );
         
         inscrits.Add(voilierInscrit);
-        return true;
+        return voilierInscrit;
     }
 
     public bool DesinscrireVoilier(string codeInscription)
@@ -92,6 +90,23 @@ public class Course
         inscrits.Remove(voilierInscrit);
         return true;
     }
+    
+    //CRUD VOILIER EN COURSE
+
+    public void DebuterLaCourse()
+    {
+        foreach (VoilierInscrit voilierInscrit in inscrits)
+        {
+            enCourse.Add(new VoilierCourse(voilierInscrit,0));
+        }
+
+        epreuves.Sort();
+        foreach (Epreuve epreuve in epreuves)
+        {
+            
+        }
+    }
+    
     
     public VoilierCourse GetVoilierCourse(int id)
     {

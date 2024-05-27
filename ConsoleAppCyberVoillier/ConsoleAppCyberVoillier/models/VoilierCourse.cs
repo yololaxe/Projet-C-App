@@ -3,7 +3,7 @@ namespace ConsoleAppCyberVoillier;
 public class VoilierCourse : VoilierInscrit
 {
     private double tempsBrute;
-    private double tempsReel;
+    private double tempsReel = 0;
     private List<Penalite> penalites = [];
     private List<Epreuve> epreuvesEffectues = [];
     
@@ -26,12 +26,15 @@ public class VoilierCourse : VoilierInscrit
         set => epreuvesEffectues = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public VoilierCourse(int id, string code, List<Personne> equipage, List<Sponsor> entreprises, string codeInscription, double tempsBrute, double tempsReel) : base(id, code, equipage, entreprises, codeInscription)
+    public VoilierCourse(int id, string code, List<Personne> equipage, List<Sponsor> entreprises, string codeInscription, double tempsBrute) : base(id, code, equipage, entreprises, codeInscription)
     {
         this.tempsBrute = tempsBrute;
-        this.tempsReel = tempsReel;
     }
 
+    public VoilierCourse(VoilierInscrit voilierInscrit, double tempsBrute) : base(voilierInscrit.Id, voilierInscrit.Code, voilierInscrit.Equipage, voilierInscrit.Entreprises, voilierInscrit.CodeInscription)
+    {
+        this.tempsBrute = tempsBrute;
+    }
     
     public void AjouterTempsBrut(double tempsEpreuve) {
         tempsBrute += tempsEpreuve;
