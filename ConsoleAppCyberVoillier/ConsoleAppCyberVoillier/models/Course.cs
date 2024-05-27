@@ -9,20 +9,22 @@ public class Course
     public List<VoilierInscrit> Inscrits
     {
         get => inscrits;
-        set => inscrits = value ?? throw new ArgumentNullException(nameof(value));
+        set => inscrits = value ?? throw new ArgumentNullException(nameof(value), "La liste des inscrits ne peut pas être null");
     }
 
     public List<Epreuve> Epreuves
     {
         get => epreuves;
-        set => epreuves = value ?? throw new ArgumentNullException(nameof(value));
+        set => epreuves = (value.Count > 0) ? value : throw new ArgumentException("La liste des épreuves ne peut pas être nulle et doit contenir au moins une épreuve.");
+        
     }
 
     public List<VoilierCourse> EnCourse
     {
         get => enCourse;
-        set => enCourse = value ?? throw new ArgumentNullException(nameof(value));
+        set => enCourse = value ?? throw new ArgumentNullException(nameof(value), "La liste des voiliers en course ne peut pas être null");
     }
+
 
     public Course(List<VoilierInscrit> inscrits, List<VoilierCourse> enCourse, List<Epreuve> epreuves)
     {
@@ -32,7 +34,7 @@ public class Course
     }
 
 
-    #region VoilierInscrit
+    #region CRUD VoilierInscrit
     public void AddVoilierInscrit(VoilierInscrit voilier)
     {
         if (voilier == GetVoilierCourse(voilier.Id) ) throw new ArgumentNullException(nameof(voilier));
@@ -63,7 +65,7 @@ public class Course
     #endregion
 
 
-    #region VoilierCourse
+    #region CRUD VoilierCourse
 
     public VoilierCourse GetVoilierCourse(int id)
     {
@@ -90,7 +92,7 @@ public class Course
     #endregion
 
 
-    #region Epreuves
+    #region CRUD Epreuves
 
     public void AddEpreuve(Epreuve epreuve)
     {
@@ -155,6 +157,12 @@ public class Course
     
     //METHODES 
 
+    public void Disqualification(int voilierCourseId)
+    {
+        if(enCourse.Contains(GetVoilierCourse(voilierCourseId)))
+            DeleteVoilierCourse(voilierCourseId);
+        throw new Exception("Le voilier n'existe pas/plus dans la course");
+    }
     public void DebuterLaCourse()
     {
         foreach (VoilierInscrit voilierInscrit in inscrits)
@@ -175,17 +183,13 @@ public class Course
             return true;
         }
 
-        throw new Exception("Ce Voilier n'est pas en course");
-        return false;
+        throw new Exception("Ce voilier n'est pas en course");
     }
     
     public void AjouterPenalite(int voilierCourseId, Penalite penalite)
     {
         VoilierCourse? voilierCourse = EnCourse.FirstOrDefault(v => v.Id == voilierCourseId);
-        if (voilierCourse != null)
-        {
-            voilierCourse.Penalites.Add(penalite);
-        }
+        voilierCourse?.Penalites.Add(penalite);
     }
 
     public bool FinDeCourse()
