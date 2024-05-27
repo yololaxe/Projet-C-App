@@ -9,19 +9,19 @@ public class Epreuve
     public int Numero
     {
         get => numero;
-        set => numero = value;
+        set => numero = (value > 0) ? value : throw new ArgumentOutOfRangeException(nameof(value), "Numero doit être supérieur à 0");
     }
 
     public string Libelle
     {
         get => libelle;
-        set => libelle = value ?? throw new ArgumentNullException(nameof(value));
+        set => libelle = !string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentNullException(nameof(value), "Libelle doit ne peut pas être null ou vide");
     }
 
     public int Ordre
     {
         get => ordre;
-        set => ordre = value;
+        set => ordre = (value > 0) ? value : throw new ArgumentOutOfRangeException(nameof(value), "ordre doit être supérieur à 0");
     }
 
     public Epreuve(int numero, string libelle, int ordre)

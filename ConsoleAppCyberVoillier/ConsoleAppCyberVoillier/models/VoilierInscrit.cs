@@ -5,17 +5,28 @@ public class VoilierInscrit: Voilier
     
     private List<Sponsor> entreprises;
     private string codeInscription;
-
+//properties
     public List<Sponsor> Entreprises
     {
         get => entreprises;
-        set => entreprises = value ?? throw new ArgumentNullException(nameof(value));
+        set  {
+            entreprises = value ?? throw new ArgumentNullException(nameof(value));
+            if (entreprises.Count == 0)
+            {
+                throw new ArgumentException("Entreprises ne peut être vide.", nameof(value));
+            }
+        }
     }
 
     public string CodeInscription
     {
         get => codeInscription;
-        set => codeInscription = value ?? throw new ArgumentNullException(nameof(value));
+        set {
+            codeInscription = (value ?? throw new ArgumentNullException(nameof(value)))
+                .Trim().Length == 0
+                    ? throw new ArgumentException("CodeInscription ne peut être vide ou un espace.", nameof(value))
+                    : value;
+        }
     }
 
     //constructor

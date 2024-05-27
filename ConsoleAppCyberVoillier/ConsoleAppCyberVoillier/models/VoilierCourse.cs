@@ -11,28 +11,26 @@ public class VoilierCourse : VoilierInscrit
     public double TempsBrute
     {
         get => tempsBrute;
-        set => tempsBrute = value;
+        set => tempsBrute = (value >= 0) ? value : throw new ArgumentOutOfRangeException(nameof(value), "Le temps brut doit être positif.");
     }
 
     public double TempsReel
     {
         get => tempsReel;
-        set => tempsReel = value;
+        set => tempsReel = (value >= 0) ? value : throw new ArgumentOutOfRangeException(nameof(value), "Le temps réel doit être positif.");
     }
 
     public List<Epreuve> EpreuvesEffectuees
     {
         get => epreuvesEffectuees;
-        set => epreuvesEffectuees = value ?? throw new ArgumentNullException(nameof(value));
+        set => epreuvesEffectuees = value ?? throw new ArgumentNullException(nameof(value), "La liste des épreuves effectuées ne peut pas être nulle.");
     }
-
 
     public List<Penalite> Penalites
     {
         get => penalites;
-        set => penalites = value ?? throw new ArgumentNullException(nameof(value));
+        set => penalites = value ?? throw new ArgumentNullException(nameof(value), "La liste des pénalités ne peut pas être nulle.");
     }
-
     public VoilierCourse(int id, string code, List<Personne> equipage, List<Sponsor> entreprises, string codeInscription, double tempsBrute) : base(id, code, equipage, entreprises, codeInscription)
     {
         this.tempsBrute = tempsBrute;
