@@ -10,19 +10,19 @@ public class Voilier
     public int Id
     {
         get => id;
-        set => id = value;
+        set => id = (value >= 0) ? value : throw new ArgumentOutOfRangeException(nameof(value), "L'ID doit être un entier positif");
     }
 
     public string Code
     {
         get => code;
-        set => code = value ?? throw new ArgumentNullException(nameof(value));
+        set => code = value ?? throw new ArgumentNullException(nameof(value), "Le code ne peut pas être null");
     }
 
     public List<Personne> Equipage
     {
         get => equipage;
-        set => equipage = value ?? throw new ArgumentNullException(nameof(value));
+        set => equipage = value.Count is >= 1 and <= 6 ? value : throw new ArgumentNullException(nameof(value), "La liste d'équipage ne peut pas être null");
     }
 
     //constructor
