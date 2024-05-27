@@ -1,17 +1,25 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 namespace ConsoleAppCyberVoillier
+
 {
-    class Program
-    {
+    class Program 
+    { 
         static void Main(string[] args)
         {
-            Personne vincent = new Personne(1, "Jorland", "Vincent", "Skipper");
-            Personne Romain = new Personne(2, "Fouletier", "Romain", "Patate");
-            Sponsor Logitech = new Sponsor(1, "Logitech");
-            Sponsor Razer = new Sponsor(1, "Razer");
-            VoilierInscrit voilier1 = new VoilierInscrit(1, "0258", [vincent, Romain], [Logitech, Razer], "UI66GV");
-            Console.WriteLine("code : " + voilier1.Code + " id : " + voilier1.Id + "capitaine : " + voilier1.Equipage[0].Nom + " sponsorisé par : " + voilier1.Entreprises[0].Nom);
+            List<Personne> equipage = new List<Personne>
+            {
+                new Personne(1, "Jorland", "Vincent", "Skipper"),
+                new Personne(2, "Fouletier", "Romain", "Patate")
+            };
+            
+            Voilier voilier = new Voilier(1, "Hesspsien\n", equipage); 
+            Console.WriteLine($"Code: \n{voilier.Code} \nEquipage:"); 
+            
+            foreach (var personne in voilier.Equipage)
+            {
+                Console.WriteLine($"{personne.Nom} {personne.Prenom}, {personne.Post}");
+            }
         }
     }
 }
