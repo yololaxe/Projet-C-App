@@ -9,7 +9,7 @@ namespace ConsoleAppCyberVoillier
         {
             List<Personne> equipage = new List<Personne>
             {
-                new Personne(1, "Jorland", "Vincent", "Skipper"),
+                new Personne(1, "Jorlande", "Vincent", "Skipper"),
                 new Personne(2, "Fouletier", "Romain", "Patate")
             };
             
