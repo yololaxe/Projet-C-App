@@ -27,6 +27,7 @@ namespace TestProject1
             Assert.That(voilier.Equipage[0].Nom, Is.EqualTo("Doe"));
         }
     }
+
     [TestFixture]
     public class VoilierInscritTests
     {
@@ -45,7 +46,14 @@ namespace TestProject1
             List<Sponsor> sponsors = new List<Sponsor> { new Sponsor(1, "Sponsor1"), new Sponsor(2, "Sponsor2") };
             List<VoilierInscrit> voiliersInscrits = new List<VoilierInscrit>();
             List<VoilierCourse> voiliersEnCourse = new List<VoilierCourse>();
-            List<Epreuve> epreuves = new List<Epreuve>();
+            List<Epreuve> epreuves = new List<Epreuve>()
+            {
+                new Epreuve(1,"water",2),
+                new Epreuve(2,"earth",1),
+                new Epreuve(3,"fire",3),
+                new Epreuve(4,"air",4),
+                
+            };
             Course course = new Course(voiliersInscrits, voiliersEnCourse, epreuves);
 
             // Act
@@ -57,8 +65,11 @@ namespace TestProject1
             Assert.That(voilierInscrit.Entreprises.Count, Is.EqualTo(2));
             Assert.That(voilierInscrit.Entreprises[0].Nom, Is.EqualTo("Sponsor1"));
         }
-    }
-    
 
-    
+
+    }
+
+
+
+
 }
