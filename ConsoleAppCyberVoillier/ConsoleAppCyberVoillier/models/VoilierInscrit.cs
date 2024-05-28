@@ -62,5 +62,4 @@ public class VoilierInscrit: Voilier
         return true;
     }
     
-    
 }
