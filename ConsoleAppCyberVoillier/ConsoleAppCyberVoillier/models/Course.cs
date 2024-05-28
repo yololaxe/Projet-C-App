@@ -2,237 +2,229 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ConsoleAppCyberVoillier;
-
-public class Course
+namespace ConsoleAppCyberVoillier
 {
-    private List<VoilierInscrit> inscrits;
-    private List<VoilierCourse> enCourse;
-    private List<Epreuve> epreuves;
-
-    public List<VoilierInscrit> Inscrits
+    public class Course
     {
-        get => inscrits;
-        set => inscrits = value ?? throw new ArgumentNullException(nameof(value), "La liste des inscrits ne peut pas être null");
-    }
+        private List<VoilierInscrit> inscrits = new List<VoilierInscrit>();
+        private List<VoilierCourse> enCourse = new List<VoilierCourse>();
+        private List<Epreuve> epreuves;
 
-    public List<Epreuve> Epreuves
-    {
-        get => epreuves;
-        set => epreuves = (value.Count > 0) ? value : throw new ArgumentException("La liste des épreuves ne peut pas être nulle et doit contenir au moins une épreuve.");
-        
-    }
+        public List<VoilierInscrit> Inscrits
+        {
+            get => inscrits;
+            set => inscrits = value ?? throw new ArgumentNullException(nameof(value), "La liste des inscrits ne peut pas être null");
+        }
 
-    public List<VoilierCourse> EnCourse
-    {
-        get => enCourse;
-        set => enCourse = value ?? throw new ArgumentNullException(nameof(value), "La liste des voiliers en course ne peut pas être null");
-    }
+        public List<Epreuve> Epreuves
+        {
+            get => epreuves;
+            set => epreuves = (value?.Count > 0) ? value : throw new ArgumentException("La liste des épreuves ne peut pas être nulle et doit contenir au moins une épreuve.");
+        }
 
+        public List<VoilierCourse> EnCourse
+        {
+            get => enCourse;
+            set => enCourse = value ?? throw new ArgumentNullException(nameof(value), "La liste des voiliers en course ne peut pas être null");
+        }
 
-    public Course(List<VoilierInscrit> inscrits, List<VoilierCourse> enCourse, List<Epreuve> epreuves)
-    {
-        Inscrits = inscrits;
-        EnCourse = enCourse;
-        Epreuves = epreuves;
-    }
+        public Course(List<Epreuve> epreuves)
+        {
+            Epreuves = epreuves;
+        }
 
+        #region CRUD VoilierInscrit
+        public void AddVoilierInscrit(VoilierInscrit voilier)
+        {
+            if (GetVoilierCourse(voilier.Id) != null) throw new ArgumentException("Voilier is already in course", nameof(voilier));
+            inscrits.Add(voilier);
+        }
 
-    #region CRUD VoilierInscrit
-    public void AddVoilierInscrit(VoilierInscrit voilier)
-    {
-        if (voilier == GetVoilierCourse(voilier.Id) ) throw new ArgumentNullException(nameof(voilier));
-        inscrits.Add(voilier);
-    }
+        public VoilierInscrit GetVoilierInscrit(int id)
+        {
+            return inscrits.Find(v => v.Id == id);
+        }
 
-    public VoilierInscrit GetVoilierInscrit(int id)
-    {
-        return inscrits.Find(v => v.Id == id);
-    }
+        public void UpdateVoilierInscrit(VoilierInscrit updatedVoilier)
+        {
+            VoilierInscrit voilier = GetVoilierInscrit(updatedVoilier.Id);
+            if (voilier == null) throw new KeyNotFoundException("Voilier not found");
 
-    public void UpdateVoilierInscrit(VoilierInscrit updatedVoilier)
-    {
-        VoilierInscrit? voilier = GetVoilierInscrit(updatedVoilier.Id);
-        if (voilier == null) throw new KeyNotFoundException("Voilier not found");
+            int index = inscrits.IndexOf(voilier);
+            inscrits[index] = updatedVoilier;
+        }
 
-        int index = inscrits.IndexOf(voilier);
-        inscrits[index] = updatedVoilier;
-    }
+        public void DeleteVoilierInscrit(int id)
+        {
+            VoilierInscrit voilier = GetVoilierInscrit(id);
+            if (voilier == null) throw new KeyNotFoundException("Voilier not found");
 
-    public void DeleteVoilierInscrit(int id)
-    {
-        VoilierInscrit? voilier = GetVoilierInscrit(id);
-        if (voilier == null) throw new KeyNotFoundException("Voilier not found");
+            inscrits.Remove(voilier);
+        }
+        #endregion
 
-        inscrits.Remove(voilier);
-    }
-    #endregion
+        #region CRUD VoilierCourse
+        public VoilierCourse GetVoilierCourse(int id)
+        {
+            return enCourse.Find(v => v.Id == id);
+        }
 
+        public void UpdateVoilierCourse(VoilierCourse updatedVoilier)
+        {
+            VoilierCourse voilier = GetVoilierCourse(updatedVoilier.Id);
+            if (voilier == null) throw new KeyNotFoundException("Voilier not found");
 
-    #region CRUD VoilierCourse
+            int index = enCourse.IndexOf(voilier);
+            enCourse[index] = updatedVoilier;
+        }
 
-    public VoilierCourse GetVoilierCourse(int id)
-    {
-        return enCourse.Find(v => v.Id == id);
-    }
+        public void DeleteVoilierCourse(int id)
+        {
+            VoilierCourse voilier = GetVoilierCourse(id);
+            if (voilier == null) throw new KeyNotFoundException("Voilier not found");
 
-    public void UpdateVoilierCourse(VoilierCourse updatedVoilier)
-    {
-        VoilierCourse? voilier = GetVoilierCourse(updatedVoilier.Id);
-        if (voilier == null) throw new KeyNotFoundException("Voilier not found");
+            enCourse.Remove(voilier);
+        }
+        #endregion
 
-        int index = enCourse.IndexOf(voilier);
-        enCourse[index] = updatedVoilier;
-    }
+        #region CRUD Epreuves
+        public void AddEpreuve(Epreuve epreuve)
+        {
+            if (GetEpreuve(epreuve.Numero) != null) throw new ArgumentException("Epreuve already exists", nameof(epreuve));
+            epreuves.Add(epreuve);
+        }
 
-    public void DeleteVoilierCourse(int id)
-    {
-        VoilierCourse voilier = GetVoilierCourse(id);
-        if (voilier == GetVoilierCourse(voilier.Id)) throw new KeyNotFoundException("Voilier not found");
+        public Epreuve GetEpreuve(int numero)
+        {
+            return epreuves.FirstOrDefault(e => e.Numero == numero);
+        }
 
-        enCourse.Remove(voilier);
-    }
+        public void UpdateEpreuve(Epreuve updatedEpreuve)
+        {
+            Epreuve epreuve = GetEpreuve(updatedEpreuve.Numero);
+            if (epreuve == null) throw new KeyNotFoundException("Epreuve not found");
 
-    #endregion
+            int index = epreuves.IndexOf(epreuve);
+            epreuves[index] = updatedEpreuve;
+        }
 
+        public void DeleteEpreuve(int id)
+        {
+            Epreuve epreuve = GetEpreuve(id);
+            if (epreuve == null) throw new KeyNotFoundException("Epreuve not found");
 
-    #region CRUD Epreuves
+            epreuves.Remove(epreuve);
+        }
+        #endregion
 
-    public void AddEpreuve(Epreuve epreuve)
-    {
-        if (epreuve == GetEpreuve(epreuve.Numero)) throw new ArgumentNullException(nameof(epreuve));
-        epreuves.Add(epreuve);
-    }
+        // CRUD INSCRIPTION DES VOILIERS
+        public VoilierInscrit InscrireVoilier(Voilier voilier, List<Sponsor> sponsors)
+        {
+            if (inscrits.Any(v => v.Code == voilier.Code))
+                throw new Exception($"Voilier déjà inscrit: {voilier.Code}");
 
-    public Epreuve GetEpreuve(int numero)
-    {
-        return epreuves.FirstOrDefault(e => e.Numero == numero);
-    }
-
-    public void UpdateEpreuve(Epreuve updatedEpreuve)
-    {
-        Epreuve? epreuve = GetEpreuve(updatedEpreuve.Numero);
-        if (epreuve == null) throw new KeyNotFoundException("Epreuve not found");
-
-        int index = epreuves.IndexOf(epreuve);
-        epreuves[index] = updatedEpreuve;
-    }
-
-    public void DeleteEpreuve(int id)
-    {
-        Epreuve epreuve = GetEpreuve(id);
-        if (epreuve == GetEpreuve(epreuve.Numero)) throw new KeyNotFoundException("Epreuve not found");
-
-        epreuves.Remove(epreuve);
-    }
-
-    #endregion
-    
-
-    // CRUD INSCRIPTION DES VOILIERS
-    public VoilierInscrit InscrireVoilier(Voilier voilier, List<Sponsor> sponsors)
-    {
-        if (inscrits.Any(v => v.Code == voilier.Code))
-            throw new Exception($"Voilier déjà inscrit: {voilier.Code}");
-        
-
-        VoilierInscrit voilierInscrit = new VoilierInscrit(
-            voilier.Id, 
-            voilier.Code,
-            voilier.Equipage,
-            sponsors, 
-            $"C{DateTime.Now.Year}{inscrits.Count + 1:0000}"
+            VoilierInscrit voilierInscrit = new VoilierInscrit(
+                voilier.Id,
+                voilier.Code,
+                voilier.Equipage,
+                sponsors,
+                $"C{DateTime.Now.Year}{inscrits.Count + 1:0000}"
             );
-        
-        inscrits.Add(voilierInscrit);
-        return voilierInscrit;
-    }
 
-    public bool DesinscrireVoilier(string codeInscription)
-    {
-        VoilierInscrit? voilierInscrit = inscrits.FirstOrDefault(v => v.CodeInscription == codeInscription);
-        if (voilierInscrit == null)
-        {
-            return false;
-        }
-        inscrits.Remove(voilierInscrit);
-        return true;
-    }
-    
-    //METHODES 
-
-    public void Disqualification(int voilierCourseId)
-    {
-        if(enCourse.Contains(GetVoilierCourse(voilierCourseId)))
-            DeleteVoilierCourse(voilierCourseId);
-        throw new Exception("Le voilier n'existe pas/plus dans la course");
-    }
-    public void DebuterLaCourse()
-    {
-        foreach (VoilierInscrit voilierInscrit in inscrits)
-        {
-            enCourse.Add(new VoilierCourse(voilierInscrit,0));
+            inscrits.Add(voilierInscrit);
+            return voilierInscrit;
         }
 
-        epreuves.Sort((e1, e2) => e1.Ordre.CompareTo(e2.Ordre));
-    }
-    
-    public bool EnregistrerTemps(int voilierCourseId, Epreuve epreuve, double temps)
-    {
-        VoilierCourse? voilierCourse = EnCourse.FirstOrDefault(v => v.Id == voilierCourseId);
-        if (voilierCourse != null)
+        public bool DesinscrireVoilier(string codeInscription)
         {
-            voilierCourse.TempsBrute += temps;
-            voilierCourse.EpreuvesEffectuees.Add(epreuve);
+            VoilierInscrit voilierInscrit = inscrits.FirstOrDefault(v => v.CodeInscription == codeInscription);
+            if (voilierInscrit == null)
+            {
+                return false;
+            }
+            inscrits.Remove(voilierInscrit);
             return true;
         }
 
-        throw new Exception("Ce voilier n'est pas en course");
-    }
-    
-    public void AjouterPenalite(int voilierCourseId, Penalite penalite)
-    {
-        VoilierCourse? voilierCourse = EnCourse.FirstOrDefault(v => v.Id == voilierCourseId);
-        voilierCourse?.Penalites.Add(penalite);
-    }
-
-    public bool FinDeCourse()
-    {
-        foreach (VoilierCourse voilierCourse in enCourse)
+        // METHODES 
+        public void Disqualification(int voilierCourseId)
         {
-            if (voilierCourse.EpreuvesEffectuees.Count != epreuves.Count)
+            VoilierCourse voilierCourse = GetVoilierCourse(voilierCourseId);
+            if (voilierCourse != null)
             {
-                throw new Exception("Impossible finir la course : tous les voilier n'ont pas enregistrer leurs temps");
+                DeleteVoilierCourse(voilierCourseId);
             }
-            voilierCourse.CalculerTempsReel();
-        }
-        Console.WriteLine($"Classement des voiliers de la course : ");
-        var list = ClasserVoiliers();
-        for (var i = 0; i < list.Count; i++)
-        {
-            var voilier = list[i];
-            Console.WriteLine($"{i++}. {voilier.Code} avec {voilier.TempsReel/3600}h {voilier.TempsReel/60}m {voilier.TempsReel%60}s");
+            else
+            {
+                throw new Exception("Le voilier n'existe pas/plus dans la course");
+            }
         }
 
-        return true;
-    }
-    
-    
-    
-    
-    
-    public List<VoilierCourse> ClasserVoiliers() {
-        List<VoilierCourse> voiliersComplets = EnCourse
-            .Where(v => v.EpreuvesEffectuees.Count == Epreuves.Count)
-            .ToList();
-        
-        foreach (VoilierCourse voiliersComplet in voiliersComplets)
+        public void DebuterLaCourse()
         {
-            voiliersComplet.CalculerTempsReel();
-        }
-    
-        List<VoilierCourse> classement = voiliersComplets.OrderBy(v => v.TempsReel).ToList();
-        return classement;
-    }
+            foreach (VoilierInscrit voilierInscrit in inscrits)
+            {
+                enCourse.Add(new VoilierCourse(voilierInscrit, 0));
+            }
 
+            epreuves.Sort((e1, e2) => e1.Ordre.CompareTo(e2.Ordre));
+        }
+
+        public bool EnregistrerTemps(int voilierCourseId, int numero, double temps)
+        {
+            if (temps < 0)
+                return false;
+            VoilierCourse voilierCourse = EnCourse.FirstOrDefault(v => v.Id == voilierCourseId);
+            if (voilierCourse != null)
+            {
+                voilierCourse.TempsBrute += temps;
+                voilierCourse.EpreuvesEffectuees.Add(GetEpreuve(numero));
+                return true;
+            }
+
+            throw new Exception("Ce voilier n'est pas en course");
+        }
+
+        public void AjouterPenalite(int voilierCourseId, Penalite penalite)
+        {
+            VoilierCourse voilierCourse = EnCourse.FirstOrDefault(v => v.Id == voilierCourseId);
+            voilierCourse?.Penalites.Add(penalite);
+        }
+
+        public bool FinDeCourse()
+        {
+            foreach (VoilierCourse voilierCourse in enCourse)
+            {
+                if (voilierCourse.EpreuvesEffectuees.Count != epreuves.Count)
+                {
+                    return false;
+                }
+                voilierCourse.CalculerTempsReel();
+            }
+            Console.WriteLine($"Classement des voiliers de la course : ");
+            var list = ClasserVoiliers();
+            for (var i = 0; i < list.Count; i++)
+            {
+                var voilier = list[i];
+                Console.WriteLine($"{i + 1}. {voilier.Code} avec {voilier.TempsReel / 3600}h {(voilier.TempsReel % 3600) / 60}m {voilier.TempsReel % 60}s");
+            }
+
+            return true;
+        }
+
+        public List<VoilierCourse> ClasserVoiliers()
+        {
+            List<VoilierCourse> voiliersComplets = EnCourse
+                .Where(v => v.EpreuvesEffectuees.Count == Epreuves.Count)
+                .ToList();
+
+            foreach (VoilierCourse voiliersComplet in voiliersComplets)
+            {
+                voiliersComplet.CalculerTempsReel();
+            }
+
+            List<VoilierCourse> classement = voiliersComplets.OrderBy(v => v.TempsReel).ToList();
+            return classement;
+        }
+    }
 }
