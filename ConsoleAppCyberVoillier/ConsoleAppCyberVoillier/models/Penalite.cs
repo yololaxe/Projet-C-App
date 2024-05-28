@@ -44,4 +44,5 @@ public class Penalite
         Duree = duree;
         Desc = desc;
     }
+    
 }
