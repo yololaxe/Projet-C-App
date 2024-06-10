@@ -7,6 +7,9 @@ public class Epreuve
     private int numero;
     private string libelle;
     private int ordre;
+    
+    public int CourseId { get; set; }
+    public Course Course { get; set; }
 
     public int Numero
     {

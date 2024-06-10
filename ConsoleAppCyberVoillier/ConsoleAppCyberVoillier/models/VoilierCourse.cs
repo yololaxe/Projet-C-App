@@ -11,6 +11,7 @@ public class VoilierCourse : VoilierInscrit
     private List<Penalite> penalites = [];
     private List<Epreuve> epreuvesEffectuees = [];
     
+    
     //properties
     public double TempsBrute
     {
@@ -39,8 +40,13 @@ public class VoilierCourse : VoilierInscrit
     {
         this.tempsBrute = tempsBrute;
     }
+    public VoilierCourse() : base(0, string.Empty, new List<Personne>(), new List<Sponsor>(), string.Empty)
+    {
+        Penalites = new List<Penalite>();
+        Sponsors = new List<Sponsor>();
+    }
 
-    public VoilierCourse(VoilierInscrit voilierInscrit, double tempsBrute) : base(voilierInscrit.Id, voilierInscrit.Code, voilierInscrit.Equipage, voilierInscrit.Entreprises, voilierInscrit.CodeInscription)
+    public VoilierCourse(VoilierInscrit voilierInscrit, double tempsBrute) : base(voilierInscrit.Id, voilierInscrit.Code, voilierInscrit.Equipage, voilierInscrit.Sponsors, voilierInscrit.CodeInscription)
     {
         this.tempsBrute = tempsBrute;
     }
@@ -51,6 +57,6 @@ public class VoilierCourse : VoilierInscrit
     
     public void CalculerTempsReel() {
         double totalPenalites = penalites.Sum(p => p.Duree);
-        TempsReel = tempsBrute - totalPenalites;
+        TempsReel = tempsBrute + totalPenalites;
     }
 }

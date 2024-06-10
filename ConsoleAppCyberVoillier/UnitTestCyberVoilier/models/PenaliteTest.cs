@@ -12,7 +12,7 @@ public class PenaliteTest
     {
             // Arrange
             var epreuves = new List<Epreuve> { new Epreuve(1, "test", 1) };
-            var course = new Course(epreuves);
+            var course = new Course(1, epreuves);
 
             // Assert
             Assert.Throws<InvalidOperationException>(() => course.AjouterPenalite(999, new Penalite("test", 10, "test")), "Le voilier n'est pas inscrit.");
@@ -28,7 +28,7 @@ public class PenaliteTest
         var voilier = new Voilier(1, "VOILIER1", equipage);
         var sponsors = new List<Sponsor> { new Sponsor(1, "Sponsor1") };
         var epreuves = new List<Epreuve> { new Epreuve(1, "test", 1) };
-        var course = new Course(epreuves);
+        var course = new Course(2, epreuves);
 
         course.InscrireVoilier(voilier, sponsors);
         course.DebuterLaCourse();
@@ -38,7 +38,7 @@ public class PenaliteTest
 
         // Assert
         Assert.That(course.EnCourse.First(v => v.Id == voilier.Id).Penalites.Count, Is.EqualTo(1));
-        Assert.That(course.EnCourse.First(v => v.Id == voilier.Id).Penalites[0].Desc, Is.EqualTo("test"));
+        Assert.That(course.EnCourse.First(v => v.Id == voilier.Id).Penalites[0].Description, Is.EqualTo("test"));
         Assert.That(course.EnCourse.First(v => v.Id == voilier.Id).Penalites[0].Duree, Is.EqualTo(10));
     }
 }

@@ -6,6 +6,9 @@ public class Sponsor
 {
     private int id;
     private string nom;
+    
+    public int VoilierInscritId { get; set; }
+    public VoilierInscrit VoilierInscrit { get; set; }
 
     //properties cc
     public int Id

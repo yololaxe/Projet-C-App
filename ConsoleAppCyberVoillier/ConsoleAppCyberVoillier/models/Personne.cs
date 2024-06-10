@@ -9,6 +9,9 @@ public class Personne
     private string prenom;
     private string post;
     
+    public int VoilierId { get; set; }
+    public Voilier Voilier { get; set; }
+    
     //properties cc
     public int Id
     {

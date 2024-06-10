@@ -18,7 +18,7 @@ public class CourseTest
         var voilier = new Voilier(1, "VOILIER1", equipage);
         var sponsors = new List<Sponsor> { new Sponsor(1, "Sponsor1") };
         var epreuves = new List<Epreuve> { new Epreuve(1, "test", 1) };
-        var course = new Course(epreuves);
+        var course = new Course(8, epreuves);
 
         course.InscrireVoilier(voilier, sponsors);
         course.DebuterLaCourse();
@@ -42,7 +42,7 @@ public class CourseTest
         var voilier = new Voilier(1, "VOILIER1", equipage);
         var sponsors = new List<Sponsor> { new Sponsor(1, "Sponsor1") };
         var epreuves = new List<Epreuve> { new Epreuve(1, "test", 1) };
-        var course = new Course(epreuves);
+        var course = new Course(4, epreuves);
 
         course.InscrireVoilier(voilier, sponsors);
         course.DebuterLaCourse();
@@ -56,7 +56,7 @@ public class CourseTest
     {
         // Arrange
         var epreuves = new List<Epreuve> { new Epreuve(1, "test", 1) };
-        var course = new Course(epreuves);
+        var course = new Course(5, epreuves);
 
         // Assert
         Assert.Throws<InvalidOperationException>(() => course.Disqualification(999), "Le voilier n'est pas inscrit.");
@@ -73,7 +73,7 @@ public class CourseTest
         var voilier = new Voilier(1, "VOILIER1", equipage);
         var sponsors = new List<Sponsor> { new Sponsor(1, "Sponsor1") };
         var epreuves = new List<Epreuve> { new Epreuve(1, "test", 1) };
-        var course = new Course(epreuves);
+        var course = new Course(6,epreuves);
 
         course.InscrireVoilier(voilier, sponsors);
         course.DebuterLaCourse();
@@ -93,7 +93,7 @@ public class CourseTest
         var voilier = new Voilier(1, "VOILIER1", equipage);
         var sponsors = new List<Sponsor> { new Sponsor(1, "Sponsor1") };
         var epreuves = new List<Epreuve> { new Epreuve(1, "test", 1) };
-        var course = new Course(epreuves);
+        var course = new Course(7,epreuves);
 
         course.InscrireVoilier(voilier, sponsors);
         course.DebuterLaCourse();
@@ -114,7 +114,7 @@ public class CourseTest
         var voilier = new Voilier(1, "VOILIER1", equipage);
         var sponsors = new List<Sponsor> { new Sponsor(1, "Sponsor1") };
         var epreuves = new List<Epreuve> { new Epreuve(1, "test", 1) };
-        var course = new Course(epreuves);
+        var course = new Course(1,epreuves);
 
         // Act
         course.InscrireVoilier(voilier, sponsors);
@@ -128,7 +128,7 @@ public class CourseTest
     {
         // Arrange
         var epreuves = new List<Epreuve> { new Epreuve(1, "test", 1) };
-        var course = new Course(epreuves);
+        var course = new Course(2, epreuves);
 
         // Assert
         Assert.Throws<InvalidOperationException>(() => course.DebuterLaCourse(), "Il n'y a pas de voiliers inscrits pour débuter la course.");
@@ -139,7 +139,7 @@ public class CourseTest
     {
         // Arrange
         var epreuves = new List<Epreuve> { new Epreuve(1, "test", 1) };
-        var course = new Course(epreuves);
+        var course = new Course(3,epreuves);
 
         // Assert
         Assert.Throws<InvalidOperationException>(() => course.EnregistrerTemps(999, 1, 100), "Le voilier n'est pas inscrit.");

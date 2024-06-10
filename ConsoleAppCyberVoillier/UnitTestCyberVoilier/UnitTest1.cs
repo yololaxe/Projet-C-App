@@ -52,7 +52,7 @@ namespace TestProject1
                 new Epreuve(4, "air", 4),
             };
 
-            Course course = new Course(epreuves);
+            Course course = new Course(1, epreuves);
 
             // Act
             course.InscrireVoilier(voilier1, sponsors);
@@ -62,9 +62,8 @@ namespace TestProject1
 
             // Assert
             Assert.That(course.Inscrits[0].Id, Is.EqualTo(voilier1.Id));
-            Assert.That(course.Inscrits[0].Id, Is.EqualTo(voilier1.Id));
-            Assert.That(course.Inscrits[0].Entreprises.Count, Is.EqualTo(2));
-            Assert.That(course.Inscrits[0].Entreprises[0].Nom, Is.EqualTo("Sponsor1"));
+            Assert.That(course.Inscrits[0].Sponsors.Count, Is.EqualTo(2));
+            Assert.That(course.Inscrits[0].Sponsors[0].Nom, Is.EqualTo("Sponsor1"));
 
             course.DebuterLaCourse();
 

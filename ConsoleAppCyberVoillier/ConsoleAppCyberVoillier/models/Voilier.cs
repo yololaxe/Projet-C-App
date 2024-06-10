@@ -8,6 +8,8 @@ public class Voilier
     private int id;
     private string code;
     private List<Personne> equipage = new();
+    
+    
 
     //properties
     public int Id
@@ -25,10 +27,15 @@ public class Voilier
     public List<Personne> Equipage
     {
         get => equipage;
-        set => equipage = value.Count is >= 1 and <= 6 ? value : throw new ArgumentNullException(nameof(value), "La liste d'équipage ne peut pas être null");
+        set => equipage = value.Count is >= 0 and <= 6 ? value : throw new ArgumentNullException(nameof(value), "La liste d'équipage ne peut pas être null");
     }
 
     //constructor
+    public Voilier()
+    {
+        Equipage = [];
+    }
+    
     public Voilier(int id, string code, List<Personne> equipage)
     {
         

@@ -6,9 +6,19 @@ namespace ConsoleAppCyberVoillier
 {
     public class Course
     {
+        private int id; 
+        public string Nom { get; set; }
         private List<VoilierInscrit> inscrits = new List<VoilierInscrit>();
         private List<VoilierCourse> enCourse = new List<VoilierCourse>();
         private List<Epreuve> epreuves;
+
+        
+        
+        public int Id
+        {
+            get => id;
+            set => id = value;
+        }
 
         public List<VoilierInscrit> Inscrits
         {
@@ -16,10 +26,11 @@ namespace ConsoleAppCyberVoillier
             set => inscrits = value ?? throw new ArgumentNullException(nameof(value), "La liste des inscrits ne peut pas être null");
         }
 
+        
         public List<Epreuve> Epreuves
         {
             get => epreuves;
-            set => epreuves = (value?.Count > 0) ? value : throw new ArgumentException("La liste des épreuves ne peut pas être nulle et doit contenir au moins une épreuve.");
+            set => epreuves = value;
         }
 
         public List<VoilierCourse> EnCourse
@@ -28,8 +39,14 @@ namespace ConsoleAppCyberVoillier
             set => enCourse = value ?? throw new ArgumentNullException(nameof(value), "La liste des voiliers en course ne peut pas être null");
         }
 
-        public Course(List<Epreuve> epreuves)
+        public Course()
         {
+            Epreuves = [];
+        }
+        
+        public Course(int Id, List<Epreuve> epreuves)
+        {
+            Id = id;
             Epreuves = epreuves;
         }
 
@@ -202,10 +219,10 @@ namespace ConsoleAppCyberVoillier
                 voilierCourse.CalculerTempsReel();
             }
             Console.WriteLine($"Classement des voiliers de la course : ");
-            var list = ClasserVoiliers();
-            for (var i = 0; i < list.Count; i++)
+            List<VoilierCourse> list = ClasserVoiliers();
+            for (int i = 0; i < list.Count; i++)
             {
-                var voilier = list[i];
+                VoilierCourse voilier = list[i];
                 Console.WriteLine($"{i + 1}. {voilier.Code} avec {voilier.TempsReel / 3600}h {(voilier.TempsReel % 3600) / 60}m {voilier.TempsReel % 60}s");
             }
 

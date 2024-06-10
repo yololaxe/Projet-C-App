@@ -1,65 +1,64 @@
 using System;
 using System.Collections.Generic;
 
-namespace ConsoleAppCyberVoillier;
-
-public class VoilierInscrit: Voilier
+namespace ConsoleAppCyberVoillier
 {
-    
-    private List<Sponsor> entreprises;
-    private string codeInscription;
-//properties
-    public List<Sponsor> Entreprises
+    public class VoilierInscrit : Voilier
     {
-        get => entreprises;
-        set  {
-            entreprises = value ?? throw new ArgumentNullException(nameof(value));
-            if (entreprises.Count == 0)
-            {
-                throw new ArgumentException("Entreprises ne peut être vide.", nameof(value));
+        private List<Sponsor> sponsors;
+        private string codeInscription;
+        
+        // Properties
+        public List<Sponsor> Sponsors
+        {
+            get => sponsors;
+            set => sponsors = value ?? new List<Sponsor>(); // Allow empty list
+        }
+
+        public string CodeInscription
+        {
+            get => codeInscription;
+            set {
+                codeInscription = (value ?? throw new ArgumentNullException(nameof(value)))
+                    .Trim().Length == 0
+                        ? throw new ArgumentException("CodeInscription ne peut être vide ou un espace.", nameof(value))
+                        : value;
             }
         }
-    }
 
-    public string CodeInscription
-    {
-        get => codeInscription;
-        set {
-            codeInscription = (value ?? throw new ArgumentNullException(nameof(value)))
-                .Trim().Length == 0
-                    ? throw new ArgumentException("CodeInscription ne peut être vide ou un espace.", nameof(value))
-                    : value;
+        // Constructor
+        protected VoilierInscrit()
+        {
+            sponsors = new List<Sponsor>(); // Initialize the list
+        }
+
+        public VoilierInscrit(int id, string code, List<Personne> equipage, List<Sponsor> entreprises, string codeInscription) 
+            : base(id, code, equipage)
+        {
+            Sponsors = entreprises;
+            CodeInscription = codeInscription;
+        }
+        
+        // CREATE, READ, UPDATE, DELETE
+        private bool AddSponsor(Sponsor sponsor)
+        {
+            if (sponsor == SearchSponsor(sponsor.Id))
+                return false;
+            sponsors.Add(sponsor);
+            return true;
+        }
+
+        private Sponsor SearchSponsor(int id)
+        {
+            return sponsors.Find(a => a.Id == id);
+        }
+
+        private bool RemoveSponsor(Sponsor sponsor)
+        {
+            if (!sponsors.Contains(sponsor))
+                return false;
+            sponsors.Remove(sponsor);
+            return true;
         }
     }
-
-    //constructor
-    public VoilierInscrit(int id, string code, List<Personne> equipage, List<Sponsor> entreprises, string codeInscription) : base(id, code, equipage)
-    {
-        this.entreprises = entreprises;
-        this.codeInscription = codeInscription;
-    }
-    
-    //CREATE, READ, UPDATE, DELETE
-    private bool AddSponsor(Sponsor sponsor)
-    {
-        if (sponsor == SearchSponsor(sponsor.Id))
-            return false;
-        entreprises.Add(sponsor);
-        return true;
-
-    }
-
-    private Sponsor SearchSponsor(int id)
-    {
-        return entreprises.Find(a => a.Id == id);
-    }
-
-    private bool RemoveSponsor(Sponsor sponsor)
-    {
-        if (!entreprises.Contains(sponsor))
-            return false;
-        entreprises.Remove(sponsor);
-        return true;
-    }
-    
 }

@@ -6,7 +6,9 @@ public class Penalite
 {
     private string id;
     private double duree;
-    private string desc; //raison de la penalite
+    private string description; //raison de la penalite
+    public int? VoilierCourseId { get; set; }
+    public VoilierCourse VoilierCourse { get; set; }
     
     //properties
     public string Id
@@ -28,21 +30,22 @@ public class Penalite
         }
     }
 
-    public string Desc
+    public string Description
     {
-        get => desc;
-        set => desc = (value ?? throw new ArgumentNullException(nameof(value)))
+        get => description;
+        set => description = (value ?? throw new ArgumentNullException(nameof(value)))
             .Trim().Length == 0 
                 ? throw new ArgumentException("Desc ne peut pas être vide ou un espace.", nameof(value))
                 : value;
     }
     
     //constructor
-    public Penalite(string id, double duree, string desc)
+    public Penalite() {}
+    public Penalite(string id, double duree, string description)
     {
         Id = id;
         Duree = duree;
-        Desc = desc;
+        Description = description;
     }
     
 }
